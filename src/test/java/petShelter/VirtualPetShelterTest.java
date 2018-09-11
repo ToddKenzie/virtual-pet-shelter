@@ -9,8 +9,8 @@ import org.junit.Test;
 public class VirtualPetShelterTest {
 	
 	VirtualPetShelter underTest = new VirtualPetShelter();
-	VirtualPet testDog = new VirtualPet("Woof", "happy");
-	VirtualPet testCat = new VirtualPet("Meow", "cute", 20, 15, 10);
+	VirtualPet testDog = new VirtualDog("Woof", "happy");
+	VirtualPet testCat = new VirtualCat("Meow", "cute", 20, 15, 10);
 	
 	@Before
 	public void setUp() {
@@ -68,6 +68,45 @@ public class VirtualPetShelterTest {
 		int catBored = testCat.getBoredom();
 		assertThat(dogBored, is(20));
 		assertThat(catBored, is(10));
+	}
+	
+	@Test
+	public void verifyOnlyOnePetisTreatedByVetFrom30to30And20to5() {
+		underTest.callVetFor("Meow");
+		int dogIllness = testDog.getIllness();
+		int catIllness = testCat.getIllness();
+		assertThat(dogIllness, is(30));
+		assertThat(catIllness, is(5));
+	}
+	
+	@Test
+	public void checkAllIllnessIncreasesBy1forFirstTick30to31And20to21() {
+		underTest.tick();
+		int dogIllness = testDog.getIllness();
+		int catIllness = testCat.getIllness();
+		assertThat(dogIllness, is(31));
+		assertThat(catIllness, is(21));
+	}
+	
+	@Test
+	public void checkAllIllnessIncreasesBy3for2Ticks30to33And20to23() {
+		underTest.tick();
+		underTest.tick();
+		int dogIllness = testDog.getIllness();
+		int catIllness = testCat.getIllness();
+		assertThat(dogIllness, is(33));
+		assertThat(catIllness, is(23));
+	}
+	
+	@Test
+	public void checkAllIllnessIncreasesBy1for2Ticksand1CleanShelter30to31And20to21() {
+		underTest.tick();
+		underTest.cleanShelter();
+		underTest.tick();
+		int dogIllness = testDog.getIllness();
+		int catIllness = testCat.getIllness();
+		assertThat(dogIllness, is(31));
+		assertThat(catIllness, is(21));
 	}
 	
 

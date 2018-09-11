@@ -1,13 +1,13 @@
 package petShelter;
 
-public class VirtualPet {
+public abstract class VirtualPet {
 
-	
-	private String petName;
-	private String description;
-	private int hunger;
-	private int thirst;
-	private int boredom;
+	protected String petName;
+	protected String description;
+	protected int hunger;
+	protected int thirst;
+	protected int boredom;
+	protected int illness;
 
 	public String getName() {
 		return petName;
@@ -29,6 +29,10 @@ public class VirtualPet {
 		return boredom;
 	}
 	
+	public int getIllness() {
+		return illness;
+	}
+	
 	protected VirtualPet(String petName, String description) {
 		this(petName, description, 15, 20, 25);
 	}
@@ -39,6 +43,7 @@ public class VirtualPet {
 		this.hunger = hunger;
 		this.thirst = thirst;
 		this.boredom = boredom;
+		this.illness = 0;
 	}
 
 	protected void feed() {
@@ -51,6 +56,14 @@ public class VirtualPet {
 
 	protected void play() {
 		boredom -= 5;
+	}
+
+	protected void treatByVet() {
+		illness -= 15;
+	}
+
+	protected void tick(int waste) {
+		illness += waste;
 	}
 
 
