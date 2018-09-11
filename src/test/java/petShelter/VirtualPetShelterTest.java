@@ -9,31 +9,30 @@ import org.junit.Test;
 public class VirtualPetShelterTest {
 	
 	VirtualPetShelter underTest = new VirtualPetShelter();
-	VirtualPet testDog = new VirtualDog("Woof", "happy");
-	VirtualPet testCat = new VirtualCat("Meow", "cute", 20, 15, 10);
+	VirtualPetGenerator testGen = new VirtualPetGenerator();
+	VirtualPet testDog; 
+	VirtualPet testCat; 
 	
 	@Before
 	public void setUp() {
-		underTest.intakeNewPet(testDog);
-		underTest.intakeNewPet(testCat);
+		underTest.takeInNewPet("dog", "Woof", "happy");
+		underTest.takeInNewPet("cat", "Meow", "cute", 20, 15, 10);
+		testDog = underTest.retrievePetInfo("Woof");
+		testCat = underTest.retrievePetInfo("Meow");
 	}
 	
 	@Test
-	public void verifyPetNameInShelterIsWoof() {
-		VirtualPet recalledPet = underTest.retrievePetInfo("Woof");
-		assertThat(recalledPet, is(testDog));
-	}
-
-	@Test
 	public void verifyPetNameInShelterIsMeow() {
 		VirtualPet recalledPet = underTest.retrievePetInfo("Meow");
-		assertThat(recalledPet, is(testCat));
+		String name = recalledPet.getName();
+		assertThat(name, is("Meow"));
 	}
 	
 	@Test
 	public void verifyAPetNameInShelterIsWoof() {
 		VirtualPet recalledPet = underTest.retrievePetInfo("Woof");
-		assertThat(recalledPet, is(testDog));
+		String name = recalledPet.getName();
+		assertThat(name, is("Woof"));
 	}
 	
 	@Test
@@ -108,6 +107,7 @@ public class VirtualPetShelterTest {
 		assertThat(dogIllness, is(31));
 		assertThat(catIllness, is(21));
 	}
+	
 	
 
 

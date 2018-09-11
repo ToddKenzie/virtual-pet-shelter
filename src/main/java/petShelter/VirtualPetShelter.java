@@ -8,16 +8,28 @@ public class VirtualPetShelter {
 	
 	private int waste;
 	Map<String, VirtualPet> shelteredPets= new HashMap<>();
-	
+	VirtualPetGenerator petGenerator;
 	
 	public VirtualPetShelter() {
 		waste = 0;
 	}
 	
-	public void intakeNewPet(VirtualPet testPet) {
-		shelteredPets.put(testPet.getName(), testPet);
+	protected void takeInNewPet(VirtualPet newPet) {
+		shelteredPets.put(newPet.getName(), newPet);
 	}
 
+	public void takeInNewPet(String petType, String petName, String description) {
+		 petGenerator = new VirtualPetGenerator();
+		 VirtualPet newPet = petGenerator.createPet(petType, petName, description);
+		 takeInNewPet(newPet);
+	}
+
+	public void takeInNewPet(String petType, String petName, String description, int hunger, int thirst, int boredom) {
+		 petGenerator = new VirtualPetGenerator();
+		 VirtualPet newPet = petGenerator.createPet(petType, petName, description, hunger, thirst, boredom);
+		 takeInNewPet(newPet);		
+	}
+	
 	public VirtualPet retrievePetInfo(String petName) {
 		return shelteredPets.get(petName);
 	}
@@ -62,5 +74,6 @@ public class VirtualPetShelter {
 	public void cleanShelter() {
 		waste = -1;
 	}
+
 
 }
