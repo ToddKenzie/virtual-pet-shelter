@@ -8,6 +8,8 @@ public abstract class VirtualPet {
 	protected int thirst;
 	protected int boredom;
 	protected int illness;
+	protected int playValue;
+	protected String petType = null;
 
 	public String getName() {
 		return petName;
@@ -44,6 +46,7 @@ public abstract class VirtualPet {
 		this.thirst = thirst;
 		this.boredom = boredom;
 		this.illness = 0;
+		this.playValue = 5;
 	}
 
 	protected void feed() {
@@ -55,7 +58,7 @@ public abstract class VirtualPet {
 	}
 
 	protected void play() {
-		boredom -= 5;
+		boredom -= playValue;
 	}
 
 	protected void treatByVet() {
@@ -64,6 +67,14 @@ public abstract class VirtualPet {
 
 	protected void tick(int waste) {
 		illness += waste;
+	}
+
+	protected void jealous() {
+		boredom += 3;
+	}
+	
+	public String toString() {
+		return petName + "\t|" + petType + "\t|" + hunger + "\t|" + thirst + "\t|" + boredom + "\t|" + illness;
 	}
 
 

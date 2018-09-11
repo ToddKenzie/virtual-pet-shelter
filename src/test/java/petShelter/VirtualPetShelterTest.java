@@ -61,11 +61,11 @@ public class VirtualPetShelterTest {
 	}
 	
 	@Test
-	public void verifyOnlyOnePetIsPlayedWithFrom25to20And10to10() {
+	public void verifyOnlyOnePetIsPlayedWithFrom25to15And10to10() {
 		underTest.playWith("Woof");
 		int dogBored = testDog.getBoredom();
 		int catBored = testCat.getBoredom();
-		assertThat(dogBored, is(20));
+		assertThat(dogBored, is(15));
 		assertThat(catBored, is(10));
 	}
 	
@@ -108,7 +108,25 @@ public class VirtualPetShelterTest {
 		assertThat(catIllness, is(21));
 	}
 	
+	@Test
+	public void checkOtherDogsGetJealousWhenDogIsPlayedWith25to28CatShouldStay10() {
+		underTest.takeInNewPet("dog", "dog2", "description");
+		underTest.playWith("Woof");
+		VirtualPet dog2 = underTest.retrievePetInfo("dog2");
+		int dog2Boredom = dog2.getBoredom();
+		int catBoredom = testCat.getBoredom();
+		int dogBored = testDog.getBoredom();
+		assertThat(dog2Boredom, is(28));
+		assertThat(catBoredom, is(10));
+		assertThat(dogBored, is(15));
+	}
 	
+	@Test
+	public void checkDogThatGetsPlayedWithIncreasesThirstFrom20to23() {
+		underTest.playWith("Woof");
+		int dogThirst = testDog.getThirst();
+		assertThat(dogThirst, is(23));
+	}
 
 
 }
