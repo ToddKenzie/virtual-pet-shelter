@@ -12,5 +12,13 @@ public class VirtualCat extends VirtualPet{
 		this.petType = "Cat";
 	}
 
+	@Override
+	protected void increaseValuesDueToTick() {
+		hunger += 2;
+		thirst += 3;
+		boredom += 2;
+		
+	}
+
 	
 }

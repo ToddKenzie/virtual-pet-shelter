@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
+import java.util.Collection;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -161,6 +163,93 @@ public class VirtualPetShelterTest {
 		assertThat(checkDog, is(nullValue()));
 		assertThat(checkCat, is(testCat));
 		assertThat(checkBird, is(testBird));
+	}
+	
+	@Test
+	public void verifyDogStatsIncreaseOnTickH15To18T20To24B25To28() {
+		underTest.tick();
+		int hunger = testDog.getHunger();
+		int thirst = testDog.getThirst();
+		int boredom = testDog.getBoredom();
+		assertThat(hunger, is(18));
+		assertThat(thirst, is(24));
+		assertThat(boredom, is(28));
+	}
+	
+	@Test
+	public void verifyCatStatsIncreaseOnTickH20to22T15to18B10to12() {
+		underTest.tick();
+		int hunger = testCat.getHunger();
+		int thirst = testCat.getThirst();
+		int boredom = testCat.getBoredom();
+		assertThat(hunger, is(22));
+		assertThat(thirst, is(18));
+		assertThat(boredom, is(12));
+	}
+	
+	@Test
+	public void verifyBirdStatsIncreaseOnTickH15to17T25to27B15to18() {
+		underTest.tick();
+		int hunger = testBird.getHunger();
+		int thirst = testBird.getThirst();
+		int boredom = testBird.getBoredom();
+		assertThat(hunger, is(17));
+		assertThat(thirst, is(27));
+		assertThat(boredom, is(18));
+	}
+	
+	@Test
+	public void verifyThatABoredom0PetWillBeAutoAdoptedOnTick() {
+		underTest.playWith("Meow");
+		underTest.playWith("Meow");
+		underTest.tick();
+		VirtualPet checkCat = underTest.retrievePetInfo("Meow");
+		VirtualPet checkDog = underTest.retrievePetInfo("Woof");
+		assertThat(checkCat, is(nullValue()));
+		assertThat(checkDog, is(testDog));
+	}
+	
+	@Test
+	public void checkThatHungerCannotGoNegativeMin0() {
+		underTest.feedAllPets();
+		underTest.feedAllPets();
+		underTest.feedAllPets();
+		underTest.feedAllPets();
+		int hunger = testDog.getHunger();
+		assertThat(hunger, is(0));
+	}
+
+	@Test
+	public void checkThatThirstCannotGoNegativeMin0() {
+		underTest.giveWaterToAllPets();
+		underTest.giveWaterToAllPets();
+		underTest.giveWaterToAllPets();
+		underTest.giveWaterToAllPets();
+		int thirst = testCat.getThirst();
+		assertThat(thirst, is(0));
+	}
+	
+	@Test
+	public void checkThatIllnessCannotGoNegativeMin0() {
+		underTest.callVetFor("Meow");
+		underTest.callVetFor("Meow");
+		int illness = testCat.getIllness();
+		assertThat(illness, is(0));
+	}
+	
+	@Test
+	public void checkThatNewPetIsAddedEvery7Ticks() {
+		underTest.tick();
+		underTest.tick();
+		underTest.callVetFor("Woof"); //needed to prevent Illness > 50 removal
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		Collection<VirtualPet> testTotal = underTest.getAllPets();
+		int totalNumber = testTotal.size();
+		assertThat(totalNumber, is(4));
 	}
 
 

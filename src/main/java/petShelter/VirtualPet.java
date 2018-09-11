@@ -19,19 +19,19 @@ public abstract class VirtualPet {
 		return description;
 	}
 	
-	public int getHunger() {
+	protected int getHunger() {
 		return hunger;
 	}
 	
-	public int getThirst() {
+	protected int getThirst() {
 		return thirst;
 	}
 	
-	public int getBoredom() {
+	protected int getBoredom() {
 		return boredom;
 	}
 	
-	public int getIllness() {
+	protected int getIllness() {
 		return illness;
 	}
 	
@@ -50,11 +50,19 @@ public abstract class VirtualPet {
 	}
 
 	protected void feed() {
-		hunger -= 5;
+		if (hunger < 5) {
+			hunger = 0;
+		} else {
+			hunger -= 5;
+		}
 	}
 
 	protected void giveWater() {
-		thirst -= 5;
+		if (thirst < 5) {
+			thirst = 0;
+		} else {
+			thirst -= 5;
+		}
 	}
 
 	protected void play() {
@@ -62,12 +70,19 @@ public abstract class VirtualPet {
 	}
 
 	protected void treatByVet() {
-		illness -= 15;
+		if (illness < 15) {
+			illness = 0;
+		} else {
+			illness -= 15;
+		}
 	}
 
 	protected void tick(int waste) {
 		illness += waste;
+		increaseValuesDueToTick();
 	}
+
+	protected abstract void increaseValuesDueToTick(); 
 
 	protected void jealous() {
 		boredom += 3;

@@ -11,12 +11,11 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 * Currently 3 Pet types - Dog, Cat, and Bird
 * User must also monitor cleanliness of the facility and clean on occasion
 * User must also care for the illness of critters, or they'll have to be removed
+* If a pet shows exceptional energy (anti-boredom), they can be automatically adopted at the end of a tick()
+* Every few days, a pet will arrive at the doorstep of the shelter
 
 **Ideas to consider that are not implemented**
 
-* List of descriptions to use as a default
-* Would some pets be auto-adopted based on their well-being?
-* Would some pets show up at random at the shelter, looking for a home?
 * Would the user be terminated for taking poor care of the shelter?
 
 ### Minimum Requirements

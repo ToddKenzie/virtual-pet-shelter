@@ -20,5 +20,12 @@ public class VirtualDog extends VirtualPet{
 		thirst += thirstFromPlaying;
 	}
 
+	@Override
+	protected void increaseValuesDueToTick() {
+		hunger += 3;
+		thirst += 4;
+		boredom += 3;
+	}
+
 
 }
