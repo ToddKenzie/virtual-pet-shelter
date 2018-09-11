@@ -1,6 +1,7 @@
 package petShelter;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -9,16 +10,18 @@ import org.junit.Test;
 public class VirtualPetShelterTest {
 	
 	VirtualPetShelter underTest = new VirtualPetShelter();
-	VirtualPetGenerator testGen = new VirtualPetGenerator();
 	VirtualPet testDog; 
 	VirtualPet testCat; 
+	VirtualPet testBird;
 	
 	@Before
 	public void setUp() {
 		underTest.takeInNewPet("dog", "Woof", "happy");
 		underTest.takeInNewPet("cat", "Meow", "cute", 20, 15, 10);
+		underTest.takeInNewPet("bird", "Tweet", "description");
 		testDog = underTest.retrievePetInfo("Woof");
 		testCat = underTest.retrievePetInfo("Meow");
+		testBird = underTest.retrievePetInfo("Tweet");
 	}
 	
 	@Test
@@ -130,12 +133,34 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void checkCatsGetHungrierWhenYouPlayWithBird20to23() {
-		underTest.takeInNewPet("bird", "Tweet", "description");
 		underTest.playWith("Tweet");
 		int catHunger = testCat.getHunger();
 		int dogHunger = testDog.getHunger();
 		assertThat(catHunger, is(23));
 		assertThat(dogHunger, is(15));
+	}
+	
+	@Test
+	public void adoptPetShouldRemovePetFromShelter() {
+		underTest.adopt("Woof");
+		VirtualPet check = underTest.retrievePetInfo("Woof");
+		assertThat(check, is(nullValue()));
+	}
+	
+	@Test
+	public void removeDogWhenIllnessExceeds50() {
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		VirtualPet checkDog = underTest.retrievePetInfo("Woof");
+		VirtualPet checkCat = underTest.retrievePetInfo("Meow");
+		VirtualPet checkBird = underTest.retrievePetInfo("Tweet");
+		assertThat(checkDog, is(nullValue()));
+		assertThat(checkCat, is(testCat));
+		assertThat(checkBird, is(testBird));
 	}
 
 

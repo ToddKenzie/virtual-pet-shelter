@@ -8,13 +8,13 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 
 ### How This Project May Differ From Other Students
 
-Work in progress - yet to be determined
-**Ideas to consider**
-* Have the user keep the cages clean as well
-* Any other additional attributes that the pet should have?
+* Currently 3 Pet types - Dog, Cat, and Bird
+* User must also monitor cleanliness of the facility and clean on occasion
+* User must also care for the illness of critters, or they'll have to be removed
+
+**Ideas to consider that are not implemented**
+
 * List of descriptions to use as a default
-* Multiple Pet Types
-	* Different description lists, attributes for each
 * Would some pets be auto-adopted based on their well-being?
 * Would some pets show up at random at the shelter, looking for a home?
 * Would the user be terminated for taking poor care of the shelter?
