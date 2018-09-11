@@ -59,14 +59,21 @@ public class VirtualPetShelter {
 	}
 
 	public void playWith(String petName) {
-		Collection<VirtualPet> allPets = getAllPets();
 		VirtualPet petToPlayWith = retrievePetInfo(petName);
 		petToPlayWith.play();
+		checkAnimosity(petToPlayWith);
+	}
+
+	private void checkAnimosity(VirtualPet petToPlayWith) {
+		Collection<VirtualPet> allPets = getAllPets();
 		for (VirtualPet virtualPet : allPets) {
-			if (virtualPet instanceof VirtualDog && virtualPet.getName() != petName ) {
+			if (petToPlayWith instanceof VirtualDog && virtualPet instanceof VirtualDog && !virtualPet.equals(petToPlayWith)) {
 				virtualPet.jealous();
+			} else if (petToPlayWith instanceof VirtualBird && virtualPet instanceof VirtualCat) {
+				virtualPet.hungerFromBird();
 			}
 		}
+		
 	}
 
 	public void callVetFor(String petName) {

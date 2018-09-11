@@ -73,9 +73,14 @@ public abstract class VirtualPet {
 		boredom += 3;
 	}
 	
+	protected void hungerFromBird() {
+		hunger += 3;
+		
+	}
 	public String toString() {
 		return petName + "\t|" + petType + "\t|" + hunger + "\t|" + thirst + "\t|" + boredom + "\t|" + illness;
 	}
+
 
 
 

@@ -9,6 +9,8 @@ public class VirtualPetGenerator {
 			newPet = new VirtualDog(petName, description);
 		} else if(petType.equalsIgnoreCase("cat")) {
 			newPet = new VirtualCat(petName, description);
+		} else if (petType.equalsIgnoreCase("bird")) {
+			newPet = new VirtualBird(petName, description);
 		}
 		
 		return newPet;
@@ -22,6 +24,8 @@ public class VirtualPetGenerator {
 			newPet = new VirtualDog(petName, description, hunger, thirst, boredom);
 		} else if(petType.equalsIgnoreCase("cat")) {
 			newPet = new VirtualCat(petName, description, hunger, thirst, boredom);
+		} else if (petType.equalsIgnoreCase("bird")) {
+			newPet = new VirtualBird(petName, description, hunger, thirst, boredom);
 		}
 		
 		return newPet;

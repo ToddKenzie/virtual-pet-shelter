@@ -127,6 +127,16 @@ public class VirtualPetShelterTest {
 		int dogThirst = testDog.getThirst();
 		assertThat(dogThirst, is(23));
 	}
+	
+	@Test
+	public void checkCatsGetHungrierWhenYouPlayWithBird20to23() {
+		underTest.takeInNewPet("bird", "Tweet", "description");
+		underTest.playWith("Tweet");
+		int catHunger = testCat.getHunger();
+		int dogHunger = testDog.getHunger();
+		assertThat(catHunger, is(23));
+		assertThat(dogHunger, is(15));
+	}
 
 
 }
