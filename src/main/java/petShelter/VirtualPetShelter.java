@@ -28,6 +28,10 @@ public class VirtualPetShelter {
 	public int getDaysRunningTheShelter() {
 		return daysRunningTheShelter;
 	}
+	
+	public int getWaste() {
+		return waste;
+	}
 
 	public VirtualPet retrievePetInfo(String petName) {
 		return shelteredPets.get(petName);
