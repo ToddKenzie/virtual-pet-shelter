@@ -7,17 +7,18 @@ import java.util.Map;
 
 public class VirtualPetShelter {
 
-	private int waste;
+	private Waste waste;
 	private Map<String, VirtualPet> shelteredPets = new HashMap<>();
 	private VirtualPetGenerator petGenerator;
 	private int daysRunningTheShelter;
+
 	private boolean wasAPetEuthanized;
 	private boolean wasAPetAdopted;
 	private boolean didAPetShowUpUnexpectedly;
 	private String endOfDayPetChange;
 
 	public VirtualPetShelter() {
-		waste = 0;
+		this.waste = new Waste(0);
 		daysRunningTheShelter = 0;
 	}
 
@@ -29,7 +30,7 @@ public class VirtualPetShelter {
 		return daysRunningTheShelter;
 	}
 	
-	public int getWaste() {
+	public Waste getWaste() {
 		return waste;
 	}
 
@@ -101,12 +102,12 @@ public class VirtualPetShelter {
 
 	public void tick() {
 		resetPetArrivalAndLeaveBooleans();
-		waste++;
+		waste.add(1);
 		daysRunningTheShelter++;
 		Collection<VirtualPet> allPets = getAllPets();
 		checkForAutoAdoptedPets(allPets);
 		for (VirtualPet virtualPet : allPets) {
-			virtualPet.tick(waste);
+			virtualPet.tick(waste.getValue());
 		}
 		checkUnCaredForPets(allPets);
 		if (this.daysRunningTheShelter % 7 == 0) {
@@ -194,7 +195,7 @@ public class VirtualPetShelter {
 	}
 
 	public void cleanShelter() {
-		waste = -1;
+		waste.setToZero();
 	}
 
 	private String generateRandomPetName() {

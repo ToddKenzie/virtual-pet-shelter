@@ -4,12 +4,17 @@ public abstract class VirtualPet {
 
 	protected String petName;
 	protected String description;
-	protected int hunger;
-	protected int thirst;
-	protected int boredom;
-	protected int illness;
-	protected int playValue;
+	protected Hunger hunger;
+	protected Thirst thirst;
+	protected Boredom boredom;
+	
 	protected String petType = null;
+	
+	protected Illness illness;
+	protected int playValue;
+	protected int increasedHungerFromTick;
+	protected int increasedThirstFromTick;
+	protected int increasedBoredomFromTick;
 
 	public String getName() {
 		return petName;
@@ -20,19 +25,19 @@ public abstract class VirtualPet {
 	}
 	
 	protected int getHunger() {
-		return hunger;
+		return hunger.getValue();
 	}
 	
 	protected int getThirst() {
-		return thirst;
+		return thirst.getValue();
 	}
 	
 	protected int getBoredom() {
-		return boredom;
+		return boredom.getValue();
 	}
 	
 	protected int getIllness() {
-		return illness;
+		return illness.getValue();
 	}
 	
 	protected VirtualPet(String petName, String description) {
@@ -42,58 +47,62 @@ public abstract class VirtualPet {
 	protected VirtualPet(String petName, String description, int hunger, int thirst, int boredom) {
 		this.petName = petName;
 		this.description = description;
-		this.hunger = hunger;
-		this.thirst = thirst;
-		this.boredom = boredom;
-		this.illness = 0;
+		this.hunger = new Hunger(hunger);
+		this.thirst = new Thirst(thirst);
+		this.boredom = new Boredom(boredom);
+		this.illness = new Illness(25);
 		this.playValue = 5;
 	}
 
 	protected void feed() {
-		if (hunger < 5) {
-			hunger = 0;
+		if (hunger.getValue() < 5) {
+			hunger.setToZero();;
 		} else {
-			hunger -= 5;
+			hunger.subtract(5);;
 		}
 	}
 
 	protected void giveWater() {
-		if (thirst < 5) {
-			thirst = 0;
+		if (thirst.getValue() < 5) {
+			thirst.setToZero();;
 		} else {
-			thirst -= 5;
+			thirst.subtract(5);
 		}
 	}
 
 	protected void play() {
-		boredom -= playValue;
+		boredom.subtract(playValue);
 	}
 
 	protected void treatByVet() {
-		if (illness < 15) {
-			illness = 0;
+		if (illness.getValue() < 15) {
+			illness.setToZero();;
 		} else {
-			illness -= 15;
+			illness.subtract(15);
 		}
 	}
 
 	protected void tick(int waste) {
-		illness += waste;
+		illness.add(waste);
 		increaseValuesDueToTick();
 	}
 
-	protected abstract void increaseValuesDueToTick(); 
+	protected void increaseValuesDueToTick() {
+		hunger.add(increasedHungerFromTick);
+		thirst.add(increasedThirstFromTick);
+		boredom.add(increasedBoredomFromTick);
+	}
 
 	protected void jealous() {
-		boredom += 3;
+		boredom.add(3);
 	}
 	
 	protected void hungerFromBird() {
-		hunger += 3;
+		hunger.add(3);
 		
 	}
 	public String toString() {
-		return petType + "\t|" + hunger + "\t|" + thirst + "\t|" + boredom + "\t|" + illness + "\t|" + petName;
+		return petType + "\t|" + hunger.emote() + "\t|" + thirst.emote() + "\t|" + boredom.emote() + "\t|" + illness.emote() + "\t|" + petName;
 	}
 
 

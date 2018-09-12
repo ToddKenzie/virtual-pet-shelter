@@ -8,11 +8,13 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 
 ### How This Project May Differ From Other Students
 
-* Currently 3 Pet types - Dog, Cat, and Bird
+* Currently 3 Pet types - Dog, Cat, and Bird (inherited from abstract VirtualPet)
 * User must also monitor cleanliness of the facility and clean on occasion
 * User must also care for the illness of critters, or they'll have to be removed
+	* Same happens for poor food and water management
 * If a pet shows exceptional energy (anti-boredom), they can be automatically adopted at the end of a tick()
 * Every few days, a pet will arrive at the doorstep of the shelter
+* All attributes are inherted classes from Attribute instead of simple ints.
 
 **Ideas to consider that are not implemented**
 
