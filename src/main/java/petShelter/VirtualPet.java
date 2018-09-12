@@ -93,7 +93,7 @@ public abstract class VirtualPet {
 		
 	}
 	public String toString() {
-		return petName + "\t|" + petType + "\t|" + hunger + "\t|" + thirst + "\t|" + boredom + "\t|" + illness;
+		return petType + "\t|" + hunger + "\t|" + thirst + "\t|" + boredom + "\t|" + illness + "\t|" + petName;
 	}
 
 

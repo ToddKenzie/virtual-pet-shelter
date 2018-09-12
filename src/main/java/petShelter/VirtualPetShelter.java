@@ -177,14 +177,14 @@ public class VirtualPetShelter {
 	}
 
 	private void checkUnCaredForPets(Collection<VirtualPet> allPets) {
-		ArrayList<String> illPets = new ArrayList<>();
+		ArrayList<String> illCaredForPets = new ArrayList<>();
 		for (VirtualPet virtualPet : allPets) {
-			if (virtualPet.getIllness() > 50) {
-				illPets.add(virtualPet.getName());
+			if (virtualPet.getIllness() > 50 || virtualPet.getHunger() > 50 || virtualPet.getThirst() > 50) {
+				illCaredForPets.add(virtualPet.getName());
 				wasAPetEuthanized = true;
 			}
 		}
-		for (String petName : illPets) {
+		for (String petName : illCaredForPets) {
 			shelteredPets.remove(petName);
 		}
 	}

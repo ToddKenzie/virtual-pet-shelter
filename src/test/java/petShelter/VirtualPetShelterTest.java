@@ -247,10 +247,28 @@ public class VirtualPetShelterTest {
 		underTest.tick();
 		underTest.tick();
 		underTest.tick();
-		Collection<VirtualPet> testTotal = underTest.getAllPets();
+		Collection<VirtualPet> testTotal = underTest.getAllPets();		
 		int totalNumber = testTotal.size();
 		assertThat(totalNumber, is(4));
 	}
+	
+	@Test
+	public void removePetWhenHungerExceeds50 () {
+		underTest.takeInNewPet("Dog", "Scruff", "description", 49, 10, 10);
+		underTest.tick();
+		VirtualPet checkScruff = underTest.retrievePetInfo("Scruff");
+		assertThat(checkScruff, is(nullValue()));
+	}
+
+	@Test
+	public void removePetWhenThirstExceeds50 () {
+		underTest.takeInNewPet("Dog", "Scruff", "description", 10, 49, 10);
+		underTest.tick();
+		VirtualPet checkScruff = underTest.retrievePetInfo("Scruff");
+		assertThat(checkScruff, is(nullValue()));
+	}
 
 
+	
+	
 }
