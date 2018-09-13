@@ -10,9 +10,9 @@ public class VirtualBird extends VirtualPet {
 		super(petName, description, hunger, thirst, boredom);
 		this.illness =  new Illness(10);
 		this.petType = "Bird";
-		this.increasedHungerFromTick = 2;
-		this.increasedThirstFromTick = 2;
-		this.increasedBoredomFromTick = 3;
+		this.increasedHungerFromTick = (int)(Math.random() * 3 + 2);
+		this.increasedThirstFromTick = (int)(Math.random() * 3 + 2);
+		this.increasedBoredomFromTick = (int)(Math.random() * 3 + 2);
 	}
 
 

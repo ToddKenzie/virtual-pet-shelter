@@ -11,16 +11,15 @@ public class VirtualDog extends VirtualPet{
 	protected VirtualDog(String petName, String description, int hunger, int thirst, int boredom) {
 		super(petName, description, hunger, thirst, boredom);
 		this.illness = new Illness(30);
-		this.playValue = 10;
 		this.petType = "Dog";
-		this.increasedHungerFromTick = 3;
-		this.increasedThirstFromTick = 4;
-		this.increasedBoredomFromTick = 3;
+		this.increasedHungerFromTick = (int)(Math.random() * 4 + 2);
+		this.increasedThirstFromTick = (int)(Math.random() * 2 + 3);
+		this.increasedBoredomFromTick = (int)(Math.random() * 4 + 3);
 	}
 	
 	protected void play() {
-		boredom.subtract(playValue);
-		thirst.add(thirstFromPlaying); 
+		boredom.decreaseValue();
+		thirst.increaseValue(thirstFromPlaying); 
 	}
 
 

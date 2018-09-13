@@ -3,6 +3,7 @@ package petShelter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
@@ -48,29 +49,29 @@ public class VirtualPetShelterTest {
 	}
 	
 	@Test
-	public void verifyAllPetsHaveBeenFedFrom15to10And20to15() {
+	public void verifyAllPetsHaveBeenFedFrom15to8And20to13() {
 		underTest.feedAllPets();
 		int dogFed = testDog.getHunger();
 		int catFed = testCat.getHunger();
-		assertThat(dogFed, is(10));
-		assertThat(catFed, is(15));
+		assertThat(dogFed, is(8));
+		assertThat(catFed, is(13));
 	}
 	
 	@Test
-	public void verifyAllPetsHaveBeenGivenWaterFrom20to15And15to10() {
+	public void verifyAllPetsHaveBeenGivenWaterFrom20to13And15to8() {
 		underTest.giveWaterToAllPets();
 		int dogThirst = testDog.getThirst();
 		int catThirst = testCat.getThirst();
-		assertThat(dogThirst, is(15));
-		assertThat(catThirst, is(10));
+		assertThat(dogThirst, is(13));
+		assertThat(catThirst, is(8));
 	}
 	
 	@Test
-	public void verifyOnlyOnePetIsPlayedWithFrom25to15And10to10() {
+	public void verifyOnlyOnePetIsPlayedWithFrom25to14And10to0() {
 		underTest.playWith("Woof");
 		int dogBored = testDog.getBoredom();
 		int catBored = testCat.getBoredom();
-		assertThat(dogBored, is(15));
+		assertThat(dogBored, is(14));
 		assertThat(catBored, is(10));
 	}
 	
@@ -123,7 +124,7 @@ public class VirtualPetShelterTest {
 		int dogBored = testDog.getBoredom();
 		assertThat(dog2Boredom, is(28));
 		assertThat(catBoredom, is(10));
-		assertThat(dogBored, is(15));
+		assertThat(dogBored, is(14));
 	}
 	
 	@Test
@@ -154,6 +155,8 @@ public class VirtualPetShelterTest {
 		underTest.tick();
 		underTest.tick();
 		underTest.tick();
+		underTest.giveWaterToAllPets();
+		underTest.feedAllPets();
 		underTest.tick();
 		underTest.tick();
 		underTest.tick();
@@ -171,9 +174,10 @@ public class VirtualPetShelterTest {
 		int hunger = testDog.getHunger();
 		int thirst = testDog.getThirst();
 		int boredom = testDog.getBoredom();
-		assertThat(hunger, is(18));
-		assertThat(thirst, is(24));
-		assertThat(boredom, is(28));
+		//added range when made them random to the pet class
+		assertTrue(hunger >= 17 && hunger <= 20);
+		assertTrue(thirst >= 23 && thirst <= 24);
+		assertTrue(boredom >= 28 && boredom <= 31);
 	}
 	
 	@Test
@@ -182,9 +186,10 @@ public class VirtualPetShelterTest {
 		int hunger = testCat.getHunger();
 		int thirst = testCat.getThirst();
 		int boredom = testCat.getBoredom();
-		assertThat(hunger, is(22));
-		assertThat(thirst, is(18));
-		assertThat(boredom, is(12));
+		//added range when made them random to the pet class
+		assertTrue(hunger >= 22 && hunger <= 25);
+		assertTrue(thirst >= 18 && thirst <= 21);
+		assertTrue(boredom >= 12 && boredom <= 14);
 	}
 	
 	@Test
@@ -193,9 +198,9 @@ public class VirtualPetShelterTest {
 		int hunger = testBird.getHunger();
 		int thirst = testBird.getThirst();
 		int boredom = testBird.getBoredom();
-		assertThat(hunger, is(17));
-		assertThat(thirst, is(27));
-		assertThat(boredom, is(18));
+		assertTrue(hunger >= 17 && hunger <= 19);
+		assertTrue(thirst >= 27 && thirst <= 29);
+		assertTrue(boredom >= 17 && boredom <= 19);
 	}
 	
 	@Test
@@ -242,6 +247,8 @@ public class VirtualPetShelterTest {
 		underTest.tick();
 		underTest.tick();
 		underTest.callVetFor("Woof"); //needed to prevent Illness > 50 removal
+		underTest.feedAllPets();
+		underTest.giveWaterToAllPets();
 		underTest.tick();
 		underTest.tick();
 		underTest.tick();
@@ -267,6 +274,29 @@ public class VirtualPetShelterTest {
 		VirtualPet checkScruff = underTest.retrievePetInfo("Scruff");
 		assertThat(checkScruff, is(nullValue()));
 	}
+	
+	@Test
+	public void verifyAll3PetChangesOccuredByEOD7() {
+		String asserted = "At the end of the day\n" +
+		  "a pet was adopted for its enthusiasm\n" +
+		"at least one pet had to be put down for its poor condition\n" +
+		"a pet arrived at our doorstep for adoption\n";
+
+		underTest.tick();
+		underTest.tick();
+		underTest.takeInNewPet("Dog", "Bark", "");
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		underTest.tick();
+		
+		underTest.takeInNewPet("Cat", "Moo", "", 10, 10, 0);
+		underTest.tick();
+
+		String endOfDay7Tick = underTest.getEndOfDayPetChange();
+		assertThat(endOfDay7Tick, is(asserted));
+	}
+	
 
 
 	

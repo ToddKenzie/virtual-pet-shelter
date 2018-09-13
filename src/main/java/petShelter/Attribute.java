@@ -12,12 +12,22 @@ public abstract class Attribute {
 		return attributeValue;
 	}
 	
-	protected void add(int augend) {
+	protected void increaseValue(int augend) {
 		this.attributeValue += augend;
 	}
 	
-	protected void subtract(int subtrahend) {
-		this.attributeValue -= subtrahend;
+	protected void decreaseValue() {
+		if (attributeValue < 7) {
+			setToZero();
+		} else if (attributeValue < 21) {
+			attributeValue -= 7;
+		} else {
+			attributeValue -= (7 + (attributeValue % 7));
+		}
+	}
+	
+	protected void decreaseValue(int subtrahend) {
+		attributeValue -= subtrahend;
 	}
 	
 	protected void setToZero() {

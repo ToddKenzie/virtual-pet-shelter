@@ -102,7 +102,7 @@ public class VirtualPetShelter {
 
 	public void tick() {
 		resetPetArrivalAndLeaveBooleans();
-		waste.add(1);
+		waste.increaseValue(1);
 		daysRunningTheShelter++;
 		Collection<VirtualPet> allPets = getAllPets();
 		checkForAutoAdoptedPets(allPets);
@@ -184,7 +184,7 @@ public class VirtualPetShelter {
 	private void checkUnCaredForPets(Collection<VirtualPet> allPets) {
 		ArrayList<String> illCaredForPets = new ArrayList<>();
 		for (VirtualPet virtualPet : allPets) {
-			if (virtualPet.getIllness() > 50 || virtualPet.getHunger() > 50 || virtualPet.getThirst() > 50) {
+			if (virtualPet.getIllness() >= 50 || virtualPet.getHunger() >= 50 || virtualPet.getThirst() >= 50) {
 				illCaredForPets.add(virtualPet.getName());
 				wasAPetEuthanized = true;
 			}
