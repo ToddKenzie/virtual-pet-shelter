@@ -10,6 +10,7 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 
 * Currently 3 Pet types - Dog, Cat, and Bird (inherited from abstract VirtualPet)
 * All attributes are inherted classes from abstract Attribute instead of simple ints.
+* If not declared when created, starting main Attributes are random within a range based on the Pet type
 * The three main Attributes that increase per tick() are randomly generated from a range per pet type on Object creation
 * User must also monitor cleanliness of the facility and clean on occasion
 * User must also care for the illness of critters, or they'll have to be removed

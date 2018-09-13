@@ -6,6 +6,9 @@ public class VirtualDog extends VirtualPet{
 
 	protected VirtualDog(String petName, String description) {
 		this(petName, description, 15, 20, 25);
+		hunger.increaseValue((int)(Math.random() * 5));
+		thirst.increaseValue((int)(Math.random() * 5));
+		boredom.increaseValue((int)(Math.random() * 5));
 	}
 	
 	protected VirtualDog(String petName, String description, int hunger, int thirst, int boredom) {

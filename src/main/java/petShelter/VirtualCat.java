@@ -3,7 +3,10 @@ package petShelter;
 public class VirtualCat extends VirtualPet{
 
 	protected VirtualCat(String petName, String description) {
-		this(petName, description, 25, 10, 10);
+		this(petName, description, 20, 15, 10);
+		hunger.increaseValue((int)(Math.random() * 5));
+		thirst.increaseValue((int)(Math.random() * 5));
+		boredom.increaseValue((int)(Math.random() * 5));
 	}
 	
 	protected VirtualCat(String petName, String description, int hunger, int thirst, int boredom) {

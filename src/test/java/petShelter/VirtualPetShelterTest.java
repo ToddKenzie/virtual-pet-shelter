@@ -19,9 +19,9 @@ public class VirtualPetShelterTest {
 	
 	@Before
 	public void setUp() {
-		underTest.takeInNewPet("dog", "Woof", "happy");
+		underTest.takeInNewPet("dog", "Woof", "happy", 15, 20, 25);
 		underTest.takeInNewPet("cat", "Meow", "cute", 20, 15, 10);
-		underTest.takeInNewPet("bird", "Tweet", "description");
+		underTest.takeInNewPet("bird", "Tweet", "description", 15, 25, 15);
 		testDog = underTest.retrievePetInfo("Woof");
 		testCat = underTest.retrievePetInfo("Meow");
 		testBird = underTest.retrievePetInfo("Tweet");
@@ -116,7 +116,7 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void checkOtherDogsGetJealousWhenDogIsPlayedWith25to28CatShouldStay10() {
-		underTest.takeInNewPet("dog", "dog2", "description");
+		underTest.takeInNewPet("dog", "dog2", "description", 15, 20, 25);
 		underTest.playWith("Woof");
 		VirtualPet dog2 = underTest.retrievePetInfo("dog2");
 		int dog2Boredom = dog2.getBoredom();
@@ -297,7 +297,41 @@ public class VirtualPetShelterTest {
 		assertThat(endOfDay7Tick, is(asserted));
 	}
 	
+	@Test
+	public void verifyStartingDogStatsAreRandomIfNotDeclared() {
+		underTest.takeInNewPet("Dog", "Fido", "s");
+		VirtualPet newPet = underTest.retrievePetInfo("Fido");
+		int hunger = newPet.getHunger();
+		int thirst = newPet.getThirst();
+		int boredom = newPet.getBoredom();
+		assertTrue(15 <= hunger && hunger <= 20);
+		assertTrue(20 <= thirst && thirst <= 25);
+		assertTrue(25 <= boredom && boredom <= 30);
+	}
+	
+	@Test
+	public void verifyStartingCatStatsAreRandomIfNotDeclared() {
+		underTest.takeInNewPet("Cat", "Fido", "s");
+		VirtualPet newPet = underTest.retrievePetInfo("Fido");
+		int hunger = newPet.getHunger();
+		int thirst = newPet.getThirst();
+		int boredom = newPet.getBoredom();
+		assertTrue(20 <= hunger && hunger <= 25);
+		assertTrue(15 <= thirst && thirst <= 20);
+		assertTrue(10 <= boredom && boredom <= 15);
+	}
 
+	@Test
+	public void verifyStartingBirdStatsAreRandomIfNotDeclared() {
+		underTest.takeInNewPet("Bird", "Fido", "s");
+		VirtualPet newPet = underTest.retrievePetInfo("Fido");
+		int hunger = newPet.getHunger();
+		int thirst = newPet.getThirst();
+		int boredom = newPet.getBoredom();
+		assertTrue(15 <= hunger && hunger <= 20);
+		assertTrue(25 <= thirst && thirst <= 30);
+		assertTrue(15 <= boredom && boredom <= 20);
+	}
 
 	
 	
