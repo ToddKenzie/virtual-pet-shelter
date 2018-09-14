@@ -15,6 +15,7 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 * User must also monitor cleanliness of the facility and clean on occasion
 * User must also care for the illness of critters, or they'll have to be removed
 	* Same happens for poor food and water management
+* Pets who have high illness will not be adoptable
 * If a pet shows exceptional energy (anti-boredom), they can be automatically adopted at the end of a tick()
 * Every few days, a pet will arrive at the doorstep of the shelter
 

@@ -2,6 +2,7 @@ package petShelter;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -145,11 +146,20 @@ public class VirtualPetShelterTest {
 	
 	@Test
 	public void adoptPetShouldRemovePetFromShelter() {
-		underTest.adopt("Woof");
-		VirtualPet check = underTest.retrievePetInfo("Woof");
+		boolean adoptCheck = underTest.adopt("Meow");
+		VirtualPet check = underTest.retrievePetInfo("Meow");
 		assertThat(check, is(nullValue()));
+		assertTrue(adoptCheck);
 	}
 	
+	@Test
+	public void refuseAdoptCommandIfIllnessIsEqualOrOver30() {
+		boolean adoptCheck = underTest.adopt("Woof");
+		VirtualPet check = underTest.retrievePetInfo("Woof");
+		assertThat(check, is(testDog));
+		assertFalse(adoptCheck);
+	}
+
 	@Test
 	public void removeDogWhenIllnessExceeds50() {
 		underTest.tick();
@@ -198,6 +208,7 @@ public class VirtualPetShelterTest {
 		int hunger = testBird.getHunger();
 		int thirst = testBird.getThirst();
 		int boredom = testBird.getBoredom();
+		//added range when made them random to the pet class
 		assertTrue(hunger >= 17 && hunger <= 19);
 		assertTrue(thirst >= 27 && thirst <= 29);
 		assertTrue(boredom >= 17 && boredom <= 19);
@@ -332,6 +343,7 @@ public class VirtualPetShelterTest {
 		assertTrue(25 <= thirst && thirst <= 30);
 		assertTrue(15 <= boredom && boredom <= 20);
 	}
+	
 
 	
 	

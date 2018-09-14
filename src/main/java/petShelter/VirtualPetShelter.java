@@ -58,8 +58,12 @@ public class VirtualPetShelter {
 		takeInNewPet(newPet);
 	}
 
-	public void adopt(String petName) {
-		shelteredPets.remove(petName);
+	public boolean adopt(String petName) {
+		if(retrievePetInfo(petName).getIllness() < 30) {
+			shelteredPets.remove(petName);
+			return true;
+		}
+		return false;
 	}
 
 	public void feedAllPets() {
