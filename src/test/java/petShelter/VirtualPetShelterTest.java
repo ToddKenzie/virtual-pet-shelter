@@ -351,6 +351,31 @@ public class VirtualPetShelterTest {
 		assertFalse(testAdd);
 	}
 	
+	@Test
+	public void checkAutoAdoptIncreasesAdoptionCountFrom0To1() {
+		underTest.takeInNewPet("Cat", "Moo", "", 10, 10, 0);
+		underTest.tick();
+		int adoptionCount = underTest.getAdoptionCount();
+		assertThat(adoptionCount, is(1));
+	}
+	
+	@Test
+	public void checkPoorCarePetsIncreaseEuthanizedCountFrom0To1() {
+		underTest.takeInNewPet("Cat", "Moo", "", 50, 10, 10);
+		underTest.tick();
+		int euthanizedCount = underTest.getEuthanizedCount();
+		assertThat(euthanizedCount, is(1));
+	}
+	
+	@Test
+	public void checkAutoAdoptOnHungerLorE10ThirstLorE10AndIllnessLorE10() {
+		underTest.takeInNewPet("Cat", "Cat", "description", 10, 10, 30);
+		underTest.callVetFor("Cat");
+		underTest.tick();
+		VirtualPet checkPet = underTest.retrievePetInfo("Cat");
+		assertThat(checkPet, is(nullValue()));
+	}
+	
 
 	
 	

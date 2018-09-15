@@ -13,6 +13,8 @@ public class VirtualPetShelter {
 	private Map<String, VirtualPet> shelteredPets = new HashMap<>();
 	private Waste waste;
 	private int daysRunningTheShelter;
+	private int adoptionCount;
+	private int euthanizedCount;
 
 	private boolean wasAPetEuthanized;
 	private boolean wasAPetAdopted;
@@ -23,16 +25,26 @@ public class VirtualPetShelter {
 		daysRunningTheShelter = 0;
 		randomPet = new RandomPetInfo();
 		petGenerator = new VirtualPetGenerator();
+		adoptionCount = 0;
+		euthanizedCount = 0;
 	}
 
+	public Waste getWaste() {
+		return waste;
+	}
+	
 	public int getDaysRunningTheShelter() {
 		return daysRunningTheShelter;
 	}
 	
-	public Waste getWaste() {
-		return waste;
+	public int getAdoptionCount() {
+		return adoptionCount;
 	}
 
+	public int getEuthanizedCount() {
+		return euthanizedCount;
+	}
+	
 	public VirtualPet retrievePetInfo(String petName) {
 		return shelteredPets.get(petName);
 	}
@@ -140,15 +152,16 @@ public class VirtualPetShelter {
 		ArrayList<String> autoAdoptablePets = findAutoAdoptablePets(allPets);
 		for (String petName : autoAdoptablePets) {
 			adopt(petName);
+			adoptionCount++;
+			wasAPetAdopted = true;
 		}
 	}
 	
 	private ArrayList<String> findAutoAdoptablePets(Collection<VirtualPet> allPets) {
 		ArrayList<String> autoAdoptablePets = new ArrayList<>();
 		for (VirtualPet virtualPet : allPets) {
-			if (virtualPet.getBoredom() <= 0) {
+			if (virtualPet.getBoredom() <= 0 || (virtualPet.getHunger() <= 10 && virtualPet.getThirst() <= 10 && virtualPet.getIllness() <= 10)) {
 				autoAdoptablePets.add(virtualPet.getName());
-				wasAPetAdopted = true;
 			}
 		}
 		return autoAdoptablePets;
@@ -164,6 +177,8 @@ public class VirtualPetShelter {
 		ArrayList<String> poorCarePets = findPoorCarePets(allPets);
 		for (String petName : poorCarePets) {
 			shelteredPets.remove(petName);
+			euthanizedCount++;
+			wasAPetEuthanized = true;
 		}
 	}
 	
@@ -172,7 +187,6 @@ public class VirtualPetShelter {
 		for (VirtualPet virtualPet : allPets) {
 			if (virtualPet.getIllness() >= 50 || virtualPet.getHunger() >= 50 || virtualPet.getThirst() >= 50) {
 				poorCarePets.add(virtualPet.getName());
-				wasAPetEuthanized = true;
 			}
 		}
 		return poorCarePets;
@@ -210,6 +224,7 @@ public class VirtualPetShelter {
 		}
 		return endOfDayPetChangeMessage;
 	}
+
 	
 }
 
