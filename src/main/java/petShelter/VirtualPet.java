@@ -66,12 +66,7 @@ public abstract class VirtualPet {
 	}
 
 	protected void treatByVet() {
-		if (illness.getValue() < 15) {
-			illness.setToZero();
-			;
-		} else {
-			illness.decreaseValue(15);
-		}
+		illness.decreaseValue();
 	}
 
 	protected void tick(int waste) {

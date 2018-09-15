@@ -302,9 +302,8 @@ public class VirtualPetShelterTest {
 		underTest.tick();
 		
 		underTest.takeInNewPet("Cat", "Moo", "", 10, 10, 0);
-		underTest.tick();
+		String endOfDay7Tick = underTest.tick();
 
-		String endOfDay7Tick = underTest.getEndOfDayPetChange();
 		assertThat(endOfDay7Tick, is(asserted));
 	}
 	

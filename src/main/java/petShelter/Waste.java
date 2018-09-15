@@ -6,7 +6,7 @@ public class Waste extends Attribute{
 		super(startingValue);
 	}
 
-	protected void setToZero() {
+	protected void decreaseValue() {
 		attributeValue = -1;
 	}
 	

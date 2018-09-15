@@ -18,20 +18,12 @@ public abstract class Attribute {
 	
 	protected void decreaseValue() {
 		if (attributeValue < 7) {
-			setToZero();
+			attributeValue = 0;
 		} else if (attributeValue < 21) {
 			attributeValue -= 7;
 		} else {
 			attributeValue -= (7 + (attributeValue % 7));
 		}
-	}
-	
-	protected void decreaseValue(int subtrahend) {
-		attributeValue -= subtrahend;
-	}
-	
-	protected void setToZero() {
-		this.attributeValue = 0;
 	}
 	
 	public String emote() {
@@ -50,8 +42,6 @@ public abstract class Attribute {
 		} else {
 			return " X(";
 		}
-		
-		
 	}
 	
 }
