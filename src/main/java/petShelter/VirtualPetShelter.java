@@ -54,14 +54,18 @@ public class VirtualPetShelter {
 	public Collection<VirtualPet> getAllPets() {
 		return shelteredPets.values();
 	}
+	
+	public boolean checkIfPetNameExists(String petName) {
+		Set<String> allPetNames = shelteredPets.keySet();
+		return allPetNames.contains(petName);
+	}
 
 	private void takeInNewPet(VirtualPet newPet) {
 		shelteredPets.put(newPet.getName(), newPet);
 	}
 
 	public boolean takeInNewPet(String petType, String petName, String description) {
-		Set<String> allPetNames = shelteredPets.keySet();
-		if (!allPetNames.contains(petName)) {
+		if (!checkIfPetNameExists(petName)) {
 			VirtualPet newPet = petGenerator.createPet(petType, petName, description);
 			takeInNewPet(newPet);
 			return true;
@@ -70,8 +74,7 @@ public class VirtualPetShelter {
 	}
 
 	public boolean takeInNewPet(String petType, String petName, String description, int hunger, int thirst, int boredom) {
-		Set<String> allPetNames = shelteredPets.keySet();
-		if (!allPetNames.contains(petName)) {
+		if (!checkIfPetNameExists(petName)) {
 			VirtualPet newPet = petGenerator.createPet(petType, petName, description, hunger, thirst, boredom);
 			takeInNewPet(newPet);
 			return true;
@@ -219,16 +222,16 @@ public class VirtualPetShelter {
 		String endOfDayPetChangeMessage = "At the end of the day\n";
 		if (wasAPetAdopted || wasAPetEuthanized || didAPetShowUpUnexpectedly) {
 			if (wasAPetAdopted) {
-				endOfDayPetChangeMessage += "a pet was adopted for its enthusiasm\n";
+				endOfDayPetChangeMessage += "A pet was adopted for its good conditions!\n";
 			}
 			if (wasAPetEuthanized) {
-				endOfDayPetChangeMessage += "at least one pet had to be put down for its poor condition\n";
+				endOfDayPetChangeMessage += "At least one pet had to be put down for its poor condition\n";
 			}
 			if (didAPetShowUpUnexpectedly) {
-				endOfDayPetChangeMessage += "a pet arrived at our doorstep for adoption\n";
+				endOfDayPetChangeMessage += "A pet arrived at our doorstep for adoption\n";
 			}
 		} else {
-			endOfDayPetChangeMessage += "nothing of note occured\n";
+			endOfDayPetChangeMessage += "Nothing of note occured\n";
 		}
 		return endOfDayPetChangeMessage;
 	}
