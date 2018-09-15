@@ -15,18 +15,20 @@ public class VirtualPetShelter {
 	private int daysRunningTheShelter;
 	private int adoptionCount;
 	private int euthanizedCount;
+	private int nextUnexpectedArrivalDate;
 
 	private boolean wasAPetEuthanized;
 	private boolean wasAPetAdopted;
 	private boolean didAPetShowUpUnexpectedly;
 
 	public VirtualPetShelter() {
-		this.waste = new Waste(0);
-		daysRunningTheShelter = 0;
-		randomPet = new RandomPetInfo();
 		petGenerator = new VirtualPetGenerator();
+		randomPet = new RandomPetInfo();
+		waste = new Waste(0);
+		daysRunningTheShelter = 0;
 		adoptionCount = 0;
 		euthanizedCount = 0;
+		nextUnexpectedArrivalDate = 7;
 	}
 
 	public Waste getWaste() {
@@ -80,6 +82,7 @@ public class VirtualPetShelter {
 	public boolean adopt(String petName) {
 		if(retrievePetInfo(petName).getIllness() < 30) {
 			shelteredPets.remove(petName);
+			adoptionCount++;
 			return true;
 		}
 		return false;
@@ -152,7 +155,6 @@ public class VirtualPetShelter {
 		ArrayList<String> autoAdoptablePets = findAutoAdoptablePets(allPets);
 		for (String petName : autoAdoptablePets) {
 			adopt(petName);
-			adoptionCount++;
 			wasAPetAdopted = true;
 		}
 	}
@@ -193,9 +195,10 @@ public class VirtualPetShelter {
 	}
 
 	private void checkForNewArrivalPet() {
-		if (this.daysRunningTheShelter % 7 == 0) {
+		if (daysRunningTheShelter == nextUnexpectedArrivalDate) {
 			didAPetShowUpUnexpectedly = true;
 			generateNewRandomPet();
+			nextUnexpectedArrivalDate = generateNextArrivalDate();
 		}
 	}
 	
@@ -205,6 +208,11 @@ public class VirtualPetShelter {
 		String petName = randomPet.generateName(allPetNames);
 		String description = randomPet.generateDescription();
 		takeInNewPet(petType, petName, description);
+	}
+	
+	private int generateNextArrivalDate() {
+		int additionalDays = (int)(Math.random() * 3 + 4);
+		return daysRunningTheShelter + additionalDays;
 	}
 	
 	private String checkPetArrivalAndLeaveBooleans() {
