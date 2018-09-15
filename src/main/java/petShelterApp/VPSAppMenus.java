@@ -61,5 +61,25 @@ public class VPSAppMenus {
 			"\'Q\' to QUIT volunteering \n";
 		return optionsMenu;
 	}
+	
+	public String displayEndMessage(VirtualPetShelter shelter) {
+		String gameEndMessage ="You managed to volunteer for " + shelter.getDaysRunningTheShelter() + " days.\n" +
+		shelter.getAdoptionCount() + " animals were adopted as pets under your care.\n" +
+		shelter.getEuthanizedCount() + " animals had to be put down under your watch.\n\n";
+		if (shelter.getAdoptionCount() == 0 && shelter.getEuthanizedCount() == 0) {
+			gameEndMessage += "Thanks, I guess.  We'll take it from here.\n";
+		} else if (shelter.getEuthanizedCount() >= 10) {
+			gameEndMessage += "You probably should reconsider working at a pet shelter.\n";
+		} else if (shelter.getEuthanizedCount() > shelter.getAdoptionCount()) {
+			gameEndMessage += "You could have done better.  We didn't save as many as we had to put down.\n";
+		} else if (shelter.getAdoptionCount() >= 10) {
+			gameEndMessage += "Great Work!  You found many animals a new home.\n";
+		} else if (shelter.getEuthanizedCount() != 0){
+			gameEndMessage += "You did well.  More animals were adopted than we had to put down.\n";
+		} else {
+			gameEndMessage += "You did good.  We didn't have to put a single animal down.\n";
+		}
+		return gameEndMessage;
+	}
 
 }
