@@ -11,7 +11,7 @@ public class VPSAppMenus {
 		String welcomeMenu = "Welcome to the Happy Home Shelter!\nThank you for volunteering your time.\n" +
 		"You will be responsible for all operations here in the shelter\n" +
 		"Try to get as many pets adopted as you can.\nKeep in mind that we do receive random pets from time to time.\n" +
-		"Also, keep care of the pets we have.  Without care, we may have no choice but to...\n";
+		"Also, keep care of the pets we have.  Without care, we may have no choice but to ";
 		return welcomeMenu;
 	}
 	
@@ -19,7 +19,7 @@ public class VPSAppMenus {
 		String statusDisplayHelpMenu = "Well-being is graded on the following scale:\n" +
 		":D\t:)\t:|\t:/\t:(\t:`(\tX(\n" +
 		"Emotes on the left are AWESOME!  They help drive adoptability.\n" +
-		"Emotes on the right are BAD!  It means we're not taking care of what we have.\nThis may lead to ....\n";
+		"Emotes on the right are BAD!  It means we're not taking care of what we have.\n";
 		return statusDisplayHelpMenu;
 	}
 	
@@ -44,6 +44,21 @@ public class VPSAppMenus {
 			"Press \'B\' to bring a new pet into the shelter\n" +
 			"Press \'H\' to bring back the Status Help menu\n" +
 			"Press \'Q\' to quit volunteering here at the Happy Home Shelter.\n";
+		return optionsMenu;
+	}
+
+	public String displayShortOptionsMenu() {
+		String optionsMenu = "What would you like to do today?\n" +
+			"\'F\' to FEED all \t" +
+			"\'W\' give WATER to all \n" +
+			"\'P\' PLAY with one \t" +
+			"\'V\' call the VET\n" +
+			"\'C\' CLEAN shelter \t" +
+			"\'A\' attempt ADOPTion \n" +
+			"\'B\' BRING animal in\t" +
+			"\'H\' Status HELP menu\n" +
+			"\'O\' explain all OPTIONS\t" +
+			"\'Q\' to QUIT volunteering \n";
 		return optionsMenu;
 	}
 
