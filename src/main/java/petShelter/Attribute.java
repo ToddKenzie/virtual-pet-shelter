@@ -17,12 +17,10 @@ public abstract class Attribute {
 	}
 	
 	protected void decreaseValue() {
-		if (attributeValue < 7) {
+		if (attributeValue < 14) {
 			attributeValue = 0;
-		} else if (attributeValue < 21) {
-			attributeValue -= 7;
 		} else {
-			attributeValue -= (7 + (attributeValue % 7));
+			attributeValue -= (14 + (attributeValue % 7));
 		}
 	}
 	

@@ -21,10 +21,11 @@ User will be in control of a pet shelter with multiple pets.  It is the user's r
 	* Pets can be removed due to poor care
 		* High Illness, Hunger, or Thirst
 	* Every few days, a pet will arrive at the doorstep of the shelter
-
-**Ideas to consider that are not implemented**
-
-* Would the user be terminated for taking poor care of the shelter?
+* Games ends in one of four ways
+	* User terminates program
+	* Over 10 animals are euthanized
+	* There are no pets in the shelter, regardless of reason
+	* User lasts 100 days (tick())
 
 ### Minimum Requirements
 

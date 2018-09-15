@@ -6,11 +6,16 @@ public class Illness extends Attribute{
 		super(startingValue);
 	}
 	
+	protected void increaseValue(int augend) {
+		int increaseBy = (int)Math.round(augend / 3.0);
+		attributeValue += increaseBy;
+	}
+	
 	protected void decreaseValue() {
-		if(attributeValue < 15) {
+		if(attributeValue < 20) {
 			attributeValue = 0;
 		} else {
-			attributeValue -= 15;
+			attributeValue -= 20;
 		}
 	}
 

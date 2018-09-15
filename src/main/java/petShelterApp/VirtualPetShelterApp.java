@@ -188,14 +188,16 @@ public class VirtualPetShelterApp {
 		Thread.sleep(1000);
 		if (hhShelter.getAdoptionCount() == 0 && hhShelter.getEuthanizedCount() == 0) {
 			System.out.println("Thanks, I guess.  We'll take it from here.");
-		} else if (hhShelter.getEuthanizedCount() >= 20) {
+		} else if (hhShelter.getEuthanizedCount() >= 10) {
 			System.out.println("You probably should reconsider working at a pet shelter.\n");
 		} else if (hhShelter.getEuthanizedCount() > hhShelter.getAdoptionCount()) {
 			System.out.println("You could have done better.  We didn't save as many as we had to put down.\n");
-		} else if (hhShelter.getAdoptionCount() >= 20) {
+		} else if (hhShelter.getAdoptionCount() >= 10) {
 			System.out.println("Great Work!  You found many animals a new home.\n");
-		} else {
+		} else if (hhShelter.getEuthanizedCount() != 0){
 			System.out.println("You did well.  More animals were adopted than we had to put down.\n");
+		} else {
+			System.out.println("You did good.  We didn't have to put a single animal down.\n");
 		}
 		
 		System.out.println("Thanks for your participation.  Have a good day.");
@@ -304,7 +306,7 @@ public class VirtualPetShelterApp {
 			System.out.println("You've volunteered here for 100 days!\nNice work!  We have to give you a break now.");
 			return true;
 		}
-		if (hhShelter.getEuthanizedCount() >= 20) {
+		if (hhShelter.getEuthanizedCount() >= 10) {
 			System.out.println("We're being shut down.  We've had to kill too many animals.");
 			return true;
 		}

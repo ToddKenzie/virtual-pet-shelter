@@ -35,7 +35,7 @@ public class VPSAppMenus {
 	}
 	
 	public String displayOptionsMenu() {
-		String optionsMenu = "What would you like to do today?\nPress \'F\' to Feed all of the pets in the shelter\n" +
+		String optionsMenu = "\'F\' to Feed all of the pets in the shelter\n" +
 			"Press \'W\' to give water to all of the pets in the shelter\n" +
 			"Press \'P\' to play with one pet of your choosing in the shelter\n" +
 			"Press \'V\' to call the vet to treat one pet in the shelter\n" +

@@ -7,17 +7,17 @@ public class Waste extends Attribute{
 	}
 
 	protected void decreaseValue() {
-		attributeValue = -1;
+		attributeValue = 0;
 	}
 	
 	public String toString() {
-		if (attributeValue == 0) {
+		if (attributeValue <= 1) {
 			return "Spotless!";
-		} else if (attributeValue <= 2) {
+		} else if (attributeValue <= 3) {
 			 return "Clean";
-		} else if (attributeValue <= 4) {
-			return "Dirty";
 		} else if (attributeValue <= 6) {
+			return "Dirty";
+		} else if (attributeValue <= 9) {
 			return "Awful!";
 		} else {
 			return "Health Hazard!!!";

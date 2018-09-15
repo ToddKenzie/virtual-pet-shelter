@@ -24,7 +24,7 @@ public class VirtualPetShelter {
 	public VirtualPetShelter() {
 		petGenerator = new VirtualPetGenerator();
 		randomPet = new RandomPetInfo();
-		waste = new Waste(0);
+		waste = new Waste(1);
 		daysRunningTheShelter = 0;
 		adoptionCount = 0;
 		euthanizedCount = 0;
