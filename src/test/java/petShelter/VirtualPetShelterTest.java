@@ -344,6 +344,14 @@ public class VirtualPetShelterTest {
 		assertTrue(15 <= boredom && boredom <= 20);
 	}
 	
+	@Test
+	public void verifyYouCannotHave2PetsWithSameNameDogNamedWoofNotCatNamedWoof() {
+		boolean testAdd = underTest.takeInNewPet("Cat", "Woof", "description");
+		VirtualPet petToTest = underTest.retrievePetInfo("Woof");
+		assertThat(petToTest, is(testDog));
+		assertFalse(testAdd);
+	}
+	
 
 	
 	
