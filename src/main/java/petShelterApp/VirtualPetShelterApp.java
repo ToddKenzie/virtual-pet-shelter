@@ -93,7 +93,7 @@ public class VirtualPetShelterApp {
 				Thread.sleep(1000);
 
 			} else if (userInputOptionsMenu.equalsIgnoreCase("V") || userInputOptionsMenu.equalsIgnoreCase("VET")) {
-				System.out.println("Who needs the attention of the vet?\nWe can only get one treated\n");
+				System.out.println("Who needs the attention of the vet?\nWe can only get one treated - Pet Names are Case Sensitive\n");
 				String petToGetVetTreatment = verifyPetNameIsValid();
 				hhShelter.callVetFor(petToGetVetTreatment);
 				System.out.println(petToGetVetTreatment + " seems to be doing much better.");
